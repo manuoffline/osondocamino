@@ -2,8 +2,9 @@ import requests
 import re
 from collections import OrderedDict
 
+url = 'http://www.osondocamino.es/release/'
+filename = 'groups.txt'
 headers = {'content-type': 'text/html; charset=utf-8'}
-
 seen = OrderedDict()
 
 
@@ -15,7 +16,7 @@ def formatstring(string):
     return s.lower()
 
 
-for line in open('groups.txt'):
+for line in open(filename):
     line = line.strip()
     line = formatstring(line)
     seen[line] = seen.get(line, 0) + 1
@@ -23,7 +24,7 @@ for line in open('groups.txt'):
 print("Ejecutando programa:\n")
 
 for line in seen:
-    url = str('http://www.osondocamino.es/release/' + line)
+    url = str(url + line)
     r = requests.get(url, headers)
     if r.status_code == 200:
         print(url + ' : ' + str(r.status_code))
