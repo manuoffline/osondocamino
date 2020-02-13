@@ -8,11 +8,10 @@ for line in open('groups.txt'):
     line = line.strip()
     seen[line] = seen.get(line, 0) + 1
 
-print(seen)
+print("Ejecutando programa:\n")
 
 for line in seen:
     url = str('http://www.osondocamino.es/release/' + line)
     r = requests.get(url, headers)
-    # print(url)
     if r.status_code == 200:
         print(url + ' : ' + str(r.status_code))
