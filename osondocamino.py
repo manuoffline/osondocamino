@@ -2,7 +2,7 @@ import requests
 import re
 from collections import OrderedDict
 
-url = 'http://www.osondocamino.es/release/'
+base_url = 'http://www.osondocamino.es/release/'
 filename = 'groups.txt'
 headers = {'content-type': 'text/html; charset=utf-8'}
 seen = OrderedDict()
@@ -24,7 +24,8 @@ for line in open(filename):
 print("Ejecutando programa:\n")
 
 for line in seen:
-    url = str(url + line)
+    url = str(base_url + line)
     r = requests.get(url, headers)
+    # print(url + ' : ' + str(r.status_code))
     if r.status_code == 200:
         print(url + ' : ' + str(r.status_code))
